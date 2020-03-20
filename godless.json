@@ -1,0 +1,55 @@
+{
+  "app_name": "godless-template",
+  "functions": {
+    "eventfunc": {
+      "handler": "cmd/eventfunc",
+      "description": "event driven function",
+      "memory": 512,
+      "concurrency": 1,
+      "runtime": "go1.x",
+      "timeout": 10,
+      "environment":{
+        "FUNCTION": "eventfunc"
+      },
+      "tags": {
+        "team": "Alpha"
+      },
+      "event": {
+        "type": "sqs"
+      },
+      "resources": {
+        "dynamodb": {
+          "table": "eventfunc"
+        }
+      }
+    },
+    "httpfunc": {
+      "handler": "cmd/httpfunc",
+      "description": "http function",
+      "memory": 512,
+      "concurrency": 1,
+      "runtime": "go1.x",
+      "timeout": 10,
+      "environment":{
+        "FUNCTION": "httpfunc"
+      },
+      "tags": {
+        "team": "Gamma"
+      },
+      "event": {
+        "type": "api"
+      },
+      "resources": {
+        "dynamodb": {
+          "table": "httpfunc"
+        }
+      }
+    }
+  },
+  "resources": {
+    "dynamodb": {
+      "table": "events"
+    }
+  },
+  "network": {}
+}
