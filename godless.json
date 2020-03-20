@@ -1,5 +1,8 @@
 {
-  "app_name": "godless-template",
+  "service": {
+    "name": "godless-template",
+    "version": "0.0.1"
+  },
   "functions": {
     "eventfunc": {
       "handler": "cmd/eventfunc",
