@@ -1,7 +1,8 @@
 {
   "service": {
     "name": "godless-template",
-    "version": "0.0.1"
+    "provider": "aws",
+    "runtime": "go1.x"
   },
   "functions": {
     "eventfunc": {
@@ -9,7 +10,6 @@
       "description": "event driven function",
       "memory": 512,
       "concurrency": 1,
-      "runtime": "go1.x",
       "timeout": 10,
       "environment":{
         "FUNCTION": "eventfunc"
@@ -31,7 +31,6 @@
       "description": "http function",
       "memory": 512,
       "concurrency": 1,
-      "runtime": "go1.x",
       "timeout": 10,
       "environment":{
         "FUNCTION": "httpfunc"
@@ -40,19 +39,22 @@
         "team": "Gamma"
       },
       "event": {
-        "type": "api"
+        "type": "apigateway"
       },
       "resources": {
-        "dynamodb": {
-          "table": "httpfunc"
-        }
+        "type": "dynamodb",
+        "table": "httpfunc"
       }
     }
   },
   "resources": {
-    "dynamodb": {
-      "table": "events"
+    "godless_db": {
+      "type": "dynamodb",
+      "table": "godless-events"
     }
   },
-  "network": {}
+  "network": {
+    "domain": "godless.com",
+    "ssl": true
+  }
 }

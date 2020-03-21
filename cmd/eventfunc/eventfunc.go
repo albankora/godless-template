@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"fmt"
 
 	"github.com/aws/aws-lambda-go/events"
@@ -14,13 +15,8 @@ func handler(ctx context.Context, sqsEvent events.SQSEvent) error {
 		return errors.New("No SQS message passed to function")
 	}
 
-	for err, message := range sqsEvent.Records {
-
-		if err != nil {
-			return err
-		}
-
-		fmt.Printf(message)
+	for _, message := range sqsEvent.Records {
+		fmt.Printf(message.Body)
 	}
 
 	return nil
