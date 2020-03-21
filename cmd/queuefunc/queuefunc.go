@@ -9,13 +9,13 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 )
 
-func handler(ctx context.Context, sqsEvent events.SQSEvent) error {
+func handler(ctx context.Context, event events.SQSEvent) error {
 
-	if len(sqsEvent.Records) == 0 {
+	if len(event.Records) == 0 {
 		return errors.New("No SQS message passed to function")
 	}
 
-	for _, message := range sqsEvent.Records {
+	for _, message := range event.Records {
 		fmt.Printf(message.Body)
 	}
 
